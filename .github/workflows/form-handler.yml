@@ -1,1 +1,33 @@
+name: Handle Form Submission
 
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Name'
+        required: true
+      email:
+        description: 'Email'
+        required: true
+      message:
+        description: 'Message'
+        required: true
+
+jobs:
+  send-email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          to: 'robinduke500@gmail.com'  # Replace with your email
+          subject: 'Submission 4 @'
+          body: |
+            Name: ${{ github.event.inputs.name }}
+            Email: ${{ github.event.inputs.email }}
+            Message: ${{ github.event.inputs.message }}
+          from: 'xnckorea_@naver.com'  # Replace with your email
+          server_address: 'smtp.naver.com'  # Replace with your SMTP server
+          server_port: 587  # Replace with your SMTP server port
+          username: 'xnckorea_@naver.com'  # Replace with your email
+          password: 'cus1997!'  # Replace with your email password or app password
